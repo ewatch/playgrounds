@@ -1,0 +1,30 @@
+type Playground
+@model
+{
+    id: ID!
+    name: String
+    location: Location
+    equipment: [Equipment]
+    rating: String
+}
+
+type Location
+{
+    longitude: Float!
+    latitude: Float!
+    city: String
+    street: String
+    zip: String
+}
+
+type Equipment
+{
+    name: String
+    equipmentType: EquipmentType
+}
+
+enum EquipmentType
+{
+    slide
+    swing
+}
