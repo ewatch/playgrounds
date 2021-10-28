@@ -31,10 +31,29 @@
 </template>
 
 <script>
+// Import AWS API Lib
+import { API } from 'aws-amplify'
+// Import the graphql queries
+import * as queries from '@/graphql/queries'
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  setup() {
+    // Fetch playgrounds directly in the setup lifecycle
+    fetchPlaygrounds()
+
+    // Async function to fetch playgrounds from aws backend
+    async function fetchPlaygrounds() {
+      // Simple query to the graphql backend
+      const fetchPlaygroundsResponse = await API.graphql({ query: queries.listPlaygrounds })
+      // Get the playground array from the response object
+      const allPlaygrounds = fetchPlaygroundsResponse.data.listPlaygrounds
+      // Print it
+      console.log(allPlaygrounds)
+    }
   }
 }
 </script>
