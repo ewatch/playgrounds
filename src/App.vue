@@ -5,11 +5,22 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import { API, graphqlOperation } from 'aws-amplify'
+import { listPlaygrounds } from './graphql/queries'
 
 export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  setup() {
+    console.log('Test2')
+    getPlaygrounds()
+    async function getPlaygrounds() {
+      console.log('Test')
+      const playgroundsResponse = await API.graphql(graphqlOperation(listPlaygrounds))
+      console.log(playgroundsResponse)
+    }
   }
 }
 </script>
